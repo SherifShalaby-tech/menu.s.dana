@@ -259,5 +259,6 @@ return [
     'MENU' => 'قائمة طعام',
     'we_serve' => 'نحن نخدم',
     'delicious_food' => 'طعام لذيذ',
-
+    'default'=>'مقاس عادى',
+    'products_count'=>'عدد المنتجات',
 ];
