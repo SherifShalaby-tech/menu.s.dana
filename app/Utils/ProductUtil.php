@@ -192,9 +192,9 @@ class ProductUtil extends Util
                     $size_data['purchase_price'] = $s['purchase_price'];
                     $size_data['sell_price'] = $s['sell_price'];
                     $size_data['discount_type'] = $s['discount_type'];
-                    $size_data['discount_start_date'] = !empty($data['discount_start_date']) ? $this->commonUtil->uf_date($data['discount_start_date']) : null;
-                    $size_data['discount_end_date'] = !empty($data['discount_end_date']) ? $this->commonUtil->uf_date($data['discount_end_date']) : null;
-                    // $size_data['active'] = !empty($data['active']) ? 1 : 0;
+                    $size_data['discount_start_date'] = !empty($s['discount_start_date']) ? $this->commonUtil->uf_date($s['discount_start_date']) : null;
+                    $size_data['discount_end_date'] = !empty($s['discount_end_date']) ? $this->commonUtil->uf_date($s['discount_end_date']) : null;
+                    // $size_data['active'] = !empty($s['active']) ? 1 : 0;
                 
                     $size = ProductSize::create($size_data);
                     $key_sizes[] = $size->id;
@@ -208,8 +208,8 @@ class ProductUtil extends Util
                     $size_data['purchase_price'] = $s['purchase_price'];
                     $size_data['sell_price'] = $s['sell_price'];
                     $size_data['discount_type'] = $s['discount_type'];
-                    $size_data['discount_start_date'] = !empty($data['discount_start_date']) ? $this->commonUtil->uf_date($data['discount_start_date']) : null;
-                    $size_data['discount_end_date'] = !empty($data['discount_end_date']) ? $this->commonUtil->uf_date($data['discount_end_date']) : null;
+                    $size_data['discount_start_date'] = !empty($s['discount_start_date']) ? $this->commonUtil->uf_date($s['discount_start_date']) : null;
+                    $size_data['discount_end_date'] = !empty($s['discount_end_date']) ? $this->commonUtil->uf_date($s['discount_end_date']) : null;
                     // $size_data['active'] = !empty($data['active']) ? 1 : 0;
                 
                     $size = ProductSize::create($size_data);
