@@ -270,5 +270,6 @@ return [
     'MENU' => 'MENU',
     'we_serve' => 'we serve',
     'delicious_food' => 'delicious food',
-
+    'default'=>'Default',
+    'products_count'=>'Products Count',
 ];
