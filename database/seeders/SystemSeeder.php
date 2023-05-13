@@ -18,11 +18,11 @@ class SystemSeeder extends Seeder
         if(!isset($pos)){
             System::updateOrCreate(
                 ['key' => 'language'],
-                ['value' => 35]
+                ['value' => 'ar']
             );
             System::updateOrCreate(
                 ['key' => 'currency'],
-                ['value' => 'ar']
+                ['value' => 35]
             );
         } 
     }

@@ -40,11 +40,10 @@
     //     window.location.href = base_path + '/cart/add-to-cart/' + $(this).data('product_id');
     // })
     $(document).on('click', '.cart_button', function(){
-        var sizeId=$(this).closest('.productCard').find('input[name=size]').val();
-        var product_id=$(this).data('product_id');
+        var variationId=$(this).closest('.productCard').find('input[name=variation]').val();
         $.ajax({
             type: "GET",
-            url: '/cart/add-to-cart/' + $(this).data('product_id')+'/'+sizeId,
+            url: '/cart/add-to-cart/' + variationId,
             // data: "data",
             dataType: "json",
             success: function (response) {
@@ -53,6 +52,7 @@
                 }else{
                     swal.fire("@lang('lang.error')!", response.status.msg, "error");
                 }
+                $('.cart_items').load(document.URL +  ' .cart_items');
             }
         });
 
@@ -64,10 +64,12 @@
         e.preventDefault();
         var price=$(this).data('price');
         var size_id=$(this).data('size_id');
+        var variation_id=$(this).data('variation_id');
         $(this).parent().parent().parent().siblings().find('.sell-price').text(price);
         $(this).closest('.productCard').children('input[name=size]').val(size_id);
         var size=$(this).data('size_name');
         var s=$(this).parent().parent().parent().siblings().find('.size-menu').text(size);
+        $(this).closest('.productCard').children('input[name=variation]').val(variation_id);
         // __write_number(size,)
         console.log($('input[name=size]').val())
         // var size_id=$(this).data('size_id');

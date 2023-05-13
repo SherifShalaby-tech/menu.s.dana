@@ -92,6 +92,8 @@ $(document).on("change", "#this_product_have_variant", function () {
 
 $(document).on("click", ".add_row", function () {
     var row_id = parseInt($("#row_id").val());
+    $("#row_id").val(row_id + 1);
+
     $.ajax({
         method: "get",
         url: "/admin/product/get-variation-row?row_id=" + row_id,
@@ -105,7 +107,6 @@ $(document).on("click", ".add_row", function () {
             $("#variation_table tbody").prepend(result);
             $(".select2").select2();
 
-            $("#row_id").val(row_id + 1);
         },
     });
 });
