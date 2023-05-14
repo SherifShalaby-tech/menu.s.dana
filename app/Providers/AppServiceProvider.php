@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\System;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
