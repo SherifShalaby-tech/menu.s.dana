@@ -272,4 +272,7 @@ return [
     'delicious_food' => 'delicious food',
     'default'=>'Default',
     'products_count'=>'Products Count',
+    'dinnig_in_restaurant'=>'In The Restaurant ',
+    'table_no'=>'Table No',
+    'enter_restaurant_store'=>'Enter Restaurant Name',
 ];

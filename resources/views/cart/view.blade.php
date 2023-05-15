@@ -153,6 +153,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                         class="w-1/2 mx-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
                         focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                          dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected value="">@lang('lang.enter_restaurant_store')</option>
                         @foreach ($stores as $id => $store)
                             <option value="{{ $id }}">{{ $store }}</option>
                         @endforeach
@@ -170,10 +171,10 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                         <div class="flex-col justify-center py-4">
                             <div class="flex @if ($locale_direction == 'rtl') flex-row-reverse @else flex-row @endif ">
                                 <div class="w-1/2 @if ($locale_direction == 'rtl') text-right @else text-left @endif">
-                                    <h3 class="font-semibold text-lg text-dark">{{ $item->name }}</h3>
+                                    <h5 class="font-semibold text-lg text-dark">{{ $item->name }}</h5>
                                 </div>
                                 <div class="w-1/2 @if ($locale_direction == 'rtl') text-right @else text-left @endif">
-                                    <h6 class="font-semibold text-lg text-dark">{{$item->attributes->size?$item->attributes->size->name:'' }}</h6>
+                                    <h6 class="font-semibold text-lg text-dark">{{$item->attributes->size?$item->attributes->size:'' }}</h6>
                                 </div>
                                 <div class="md:w-1/3 xs:w-5/12">
                                     <div class="flex flex-row qty_row justify-center w-full">
@@ -196,10 +197,11 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                             <p class="text-xs text-dark font-semibold">{!! $item->associatedModel->product_details !!}</p>
                             <h3
                                 class="font-semibold text-base text-dark py-2 @if ($item->associatedModel->variations->first()->name == 'Default') hidden @endif">
-                                @lang('lang.select_size')</h3>
-                            @foreach ($item->associatedModel->variations as $variation)
-                                @if (!empty($variation->size))
-                                    <div
+                                {{-- @lang('lang.select_size')</h3> --}}
+                        </h3>
+                                @foreach ($item->associatedModel->variations as $variation)
+                                @if ( $variation->id==$item->attributes->variation_id)
+                                <div
                                         class="flex @if ($locale_direction == 'rtl') flex-row-reverse @else flex-row @endif ">
                                         {{-- <div class="flex-1">
                                             <div
@@ -219,9 +221,10 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                                 </label>
                                             </div>
                                         </div> --}}
+                                        {{-- {{$item}} --}}
                                         <div
                                             class="flex-1 text-base text-dark @if ($locale_direction == 'rtl') text-left @else text-right @endif font-semibold">
-                                            {{ @num_format($variation->default_sell_price - $item->attributes->size->pivot->discount) }}
+                                            {{ @num_format($variation->default_sell_price - $item->attributes->discount) }}
                                             <span
                                                 class="font-bold">
                                                 {{ session('currency')['code'] }}</span>

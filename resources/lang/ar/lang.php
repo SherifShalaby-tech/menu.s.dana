@@ -261,4 +261,7 @@ return [
     'delicious_food' => 'طعام لذيذ',
     'default'=>'مقاس عادى',
     'products_count'=>'عدد المنتجات',
+    'dinnig_in_restaurant'=>'داخل المطعم',
+    'table_no'=>'طاولة رقم',
+    'enter_restaurant_store'=>'ادخل اسم المطعم'
 ];
