@@ -18,7 +18,7 @@
                     <div>
                     <a href="{{ action('ProductController@show', $product->id) }}">
                          <!-- class d-flex justify-content-between -->
-                            <h5>{{ Str::limit($product->name, 15) }}</h5>
+                        <h5>{{ Str::limit($product->name, 15) }}</h5>
                         </a>
                             <span class="style-change" style="display: flex; justify-content: space-between; align-items: center;">
                                 @foreach($product->variations as $s)
