@@ -98,7 +98,8 @@ class ProductController extends Controller
                     $product_sizes = Variation::where('product_id',$row->id)->get();
                     if(!empty($product_sizes)){
                     foreach($product_sizes as $size){
-                        $sell.=$size->default_sell_price.'<br>';
+                        $p=number_format($size->default_sell_price,  2, '.', ',');
+                        $sell.=$p.'<br>';
                     }
                 }
                     return $sell;
@@ -108,7 +109,8 @@ class ProductController extends Controller
                     $product_sizes = Variation::where('product_id',$row->id)->get();
                     if(!empty($product_sizes)){
                     foreach($product_sizes as $size){
-                        $purchase.=$size->default_purchase_price.'<br>';
+                        $p=number_format($size->default_purchase_price,  2, '.', ',');
+                        $purchase.=$p.'<br>';
                     }
                 }
                     return $purchase;
@@ -241,8 +243,13 @@ class ProductController extends Controller
         
         $data = $request->except('_token', 'image');
         $data['sku'] = $this->productUtil->generateProductSku($data['name']);
-        $data['purchase_price'] = $data['purchase_price'];
-        $data['sell_price'] = $data['sell_price'];
+        if(empty($request->variations)){
+            $data['purchase_price'] = $data['purchase_price'];
+            $data['sell_price'] = $data['sell_price'];
+        }else{
+                $data['purchase_price'] = 0;
+                $data['sell_price'] = 0;
+        }
         $data['discount_type'] = !empty($request->discount_type)? $request->discount_type:null;
         $data['discount'] = !empty($request->discount)?$request->discount : null;
         $data['discount_start_date'] = !empty($data['discount_start_date']) ? $this->commonUtil->uf_date($data['discount_start_date']) : null;
@@ -337,8 +344,29 @@ class ProductController extends Controller
     {
         try {
             $data = $request->except('_token', '_method', 'image');
-            $data['purchase_price'] = $data['purchase_price'];
-            $data['sell_price'] = $data['sell_price'];
+            if(!empty($request->variations) && count($request->variations)==1){
+                if(!empty($request->variations)){
+                    foreach ($request->variations as $v) {
+                        if($v['name']=='Default'){
+                            $data['purchase_price'] = $data['purchase_price'];
+                            $data['sell_price'] = $data['sell_price'];
+                        }else{
+                            $data['purchase_price'] = 0;
+                            $data['sell_price'] = 0;
+                        }
+                    break;
+                    }
+                }
+                
+            }
+            elseif(empty($request->variations)){
+                $data['purchase_price'] = $data['purchase_price'];
+                $data['sell_price'] = $data['sell_price'];
+            }
+            else{
+                $data['purchase_price'] = 0;
+                $data['sell_price'] = 0;
+            }
             $data['discount_type'] = !empty($request->discount_type)? $request->discount_type:null;
             $data['discount'] = !empty($request->discount)?$request->discount : null;
             $data['discount_start_date'] = !empty($data['discount_start_date']) ? $this->commonUtil->uf_date($data['discount_start_date']) : null;
@@ -373,6 +401,9 @@ class ProductController extends Controller
                     $product->addMedia($filePath)->toMediaCollection('product');
                     }
                 }
+            }
+            if(!$request->has('image') || strlen($request->input('image'))==0){
+                $product->clearMediaCollection('product');
             }
 
 
