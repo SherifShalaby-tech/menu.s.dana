@@ -382,7 +382,7 @@ class ProductController extends Controller
             DB::beginTransaction();
             $product->update($data);
             $this->productUtil->createOrUpdateVariations($product, $request->variations);
-            $this->productUtil->createOrUpdateProductSizes($product, $request->sizes);
+            // $this->productUtil->createOrUpdateProductSizes($product, $request->sizes);
 
            /* if ($request->has('uploaded_image_name')) {
                 if (!empty($request->input('uploaded_image_name'))) {
