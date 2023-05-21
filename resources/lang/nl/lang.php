@@ -229,7 +229,7 @@ return [
     'added_to_the_cart_successfully' => 'Succesvol toegevoegd aan de winkelwagen',
 
     'currency' => 'munteenheid',
-    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00201003836917 - 00905386531059',
+    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00905386531059',
 
     'add_dining_room' => 'Eetkamer toevoegen',
     'dining_room_name_already_exist' => 'De naam van de eetkamer bestaat al.',

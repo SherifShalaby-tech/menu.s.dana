@@ -229,7 +229,7 @@ return [
     'added_to_the_cart_successfully' => 'با موفقیت به سبد خرید اضافه شد',
 
     'currency' => 'واحد پول',
-    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00201003836917 - 00905386531059',
+    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00905386531059',
 
     'add_dining_room' => 'اتاق غذاخوری را اضافه کنید',
     'dining_room_name_already_exist' => 'نام اتاق غذاخوری از قبل وجود دارد.',
