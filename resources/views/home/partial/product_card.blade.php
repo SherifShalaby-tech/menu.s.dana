@@ -11,7 +11,7 @@
             <div class="single-food">
                 <div class="food-img  product-img">
                     <a href="{{ action('ProductController@show', $product->id) }}">
-                    <img src="{{ !empty($product->getFirstMediaUrl('product'))? $product->getFirstMediaUrl('product'): asset('uploads/' . session('logo')) }}" class="img-fluid" alt="">
+                    <img src="{{ images_asset($product->getFirstMediaUrl('product')) }}" class="img-fluid" alt="">
                     </a>
                 </div>
                 <div class="food-content">

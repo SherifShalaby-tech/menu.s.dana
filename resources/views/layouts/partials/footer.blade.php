@@ -5,7 +5,7 @@
 
                 <div class="col-md-8">
                     <div class="single-widget single-widget1" style="display: flex;align-items: center;">
-                        <img src="{{ asset('uploads/' . session('logo')) }}" alt="logo" style="width: 110px; height:110px; margin: auto 30px; border-radius: 10px;"> 
+                        <img src="{{ images_asset(asset('uploads/' . session('logo'))) }}" alt="logo" style="width: 110px; height:110px; margin: auto 30px; border-radius: 10px;"> 
                                     
                                         <div class="d-flex">
                                             <div class="into-icon"> 
@@ -17,6 +17,12 @@
                                                             {{ App\Models\System::getProperty('about_us_footer') }} 
                                                          </span>
                                                     </h6>
+                                                    <br>
+                                                    <p class="text-white text-center">
+                                                        <a href="{{ action('AboutUsController@index') }}"
+                                                            class="bg-red text-white md:text-base xs:text-sm font-bold px-4 py-2 border-2 border-white rounded-lg">@lang('lang.show_more')
+                                                        </a>
+                                                    </p>
                                             </div>
                                         </div>
                     </div>

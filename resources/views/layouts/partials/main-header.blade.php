@@ -37,7 +37,7 @@
 </header>
 
 
-<section class="banner-area text-center"  style="background-image: url('@if(!empty(session('home_background_image'))){{ asset('uploads/' . session('home_background_image')) }}@else{{ asset('images/default-page-bg.png') }}@endif')">
+<section class="banner-area text-center"  style="background-image: url('@if(!empty(session('home_background_image'))){{ images_asset(asset('uploads/' . session('home_background_image'))) }}@else{{ asset('images/default-page-bg.png') }}@endif')">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 bg-black opacity-70 p-4 animated fadeInDown" data-appear="fadeInDown" data-delay="800">

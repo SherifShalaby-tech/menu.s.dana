@@ -163,7 +163,7 @@ $page_background_image=App\Models\System::where('key','page_background_image')->
                     <div class="preview-home-container">
                         @if ( isset($settings['home_background_image']))
                             <div class="preview">
-                                <img src="{{ asset("uploads/".  $settings['home_background_image']) }}"
+                                <img src="{{ images_asset(asset("uploads/".  $settings['home_background_image'])) }}"
                                      id="img_home_footer" alt="">
                                 <button class="btn btn-xs btn-danger delete-btn remove_image" data-type="home_background_image"><i style="font-size: 25px;"
                                                                                                                   class="fa fa-trash"></i></button>
