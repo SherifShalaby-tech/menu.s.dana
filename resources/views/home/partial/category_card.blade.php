@@ -3,7 +3,7 @@
 <div class="single-food">
     <div class="food-img">
         <a href="{{ action('ProductController@getProductListByCategory', $category->id) }}">
-            <img src="{{ !empty($category->getFirstMediaUrl('product_class')) ? $category->getFirstMediaUrl('product_class') : asset('uploads/' . session('logo')) }}" 
+            <img src="{{ images_asset( $category->getFirstMediaUrl('product_class')) }}" 
             class="img-fluid" alt="">
         </a>
     </div>
