@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-2 col-4">
                 <div class="logo-area">
-                    <img src="{{ asset('uploads/' . session('logo')) }}" alt="logo" style="height: 77px; border-radius: 10px;">
+                    <img src="{{ images_asset(asset('uploads/' . session('logo'))) }}" alt="logo" style="height: 77px; border-radius: 10px;">
                 </div>
             </div>
             <div class="col-lg-10 col-8">

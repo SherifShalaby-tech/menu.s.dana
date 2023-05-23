@@ -233,7 +233,7 @@ return [
     'added_to_the_cart_successfully' => 'کارٹ میں کامیابی کے ساتھ شامل کر دیا گیا۔',
 
     'currency' => 'کرنسی',
-    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00201003836917 - 00905386531059',
+    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00905386531059',
 
     'add_dining_room' => 'کھانے کا کمرہ شامل کریں۔',
     'dining_room_name_already_exist' => 'کھانے کے کمرے کا نام پہلے سے موجود ہے۔',

@@ -84,9 +84,11 @@ $(document).on("change", "#this_product_have_variant", function () {
     if ($(this).prop("checked")) {
         $(".select2").select2();
         $(".this_product_have_variant_div").slideDown();
+        $('input[name=sell_price]').prop('required',false);
     } else {
         $(".select2").select2();
         $(".this_product_have_variant_div").slideUp();
+        $('input[name=sell_price]').prop('required',true);
     }
 });
 
@@ -114,14 +116,14 @@ $(document).on("click", ".remove_row", function () {
     row_id = $(this).closest("tr").data("row_id");
     $(this).closest("tr").remove();
 });
-$(document).on("change", "#purchase_price", function () {
-    let purchase_price = __read_number($(this));
-    __write_number($(".default_purchase_price"), purchase_price);
-});
-$(document).on("change", "#sell_price", function () {
-    let sell_price = __read_number($(this));
-    __write_number($(".default_sell_price"), sell_price);
-});
+// $(document).on("change", "#purchase_price", function () {
+//     let purchase_price = __read_number($(this));
+//     __write_number($(".default_purchase_price"), purchase_price);
+// });
+// $(document).on("change", "#sell_price", function () {
+//     let sell_price = __read_number($(this));
+//     __write_number($(".default_sell_price"), sell_price);
+// });
 
 //////
 $('body').delegate('.add_size_row' , 'click', function() {

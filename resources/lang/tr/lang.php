@@ -77,7 +77,7 @@ return [
     'filter' => 'filtre',
     'active' => 'Aktif',
     'deactivated' => 'devre dışı',
-    'sort' => 'Çeşit',
+    'sort' => 'Sıralama',
     'create_offer' => 'Teklif Oluştur',
     'products' => 'Ürün:% s',
     'start_date' => 'Başlangıç ​​tarihi',
@@ -229,7 +229,7 @@ return [
     'added_to_the_cart_successfully' => 'Sepete başarıyla eklendi',
 
     'currency' => 'para birimi',
-    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00201003836917 - 00905386531059',
+    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00905386531059',
 
     'add_dining_room' => 'Yemek Odası Ekle',
     'dining_room_name_already_exist' => 'Yemek odası adı zaten var.',

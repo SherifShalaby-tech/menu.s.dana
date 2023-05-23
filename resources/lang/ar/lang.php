@@ -230,7 +230,7 @@ return [
     'added_to_the_cart_successfully' => 'تم الإضافة لعربة التسوق',
 
     'currency' => 'عملة',
-    'footer_copyright' => ' 00201003836917 - 
+    'footer_copyright' => ' 
     00905386531059 - تمت البرمجة بكل فخر في شريف شلبي التقنية، 0097433231457',
 
     'add_dining_room' => 'أضف صالة طعام',
