@@ -52,7 +52,7 @@ class CartController extends Controller
             ->select('products.*')
             ->get();
 
-        $total = \Cart::session($user_id)->getTotal();
+        $total =$this->getTotal($user_id);
         $month_array = $this->commonUtil->getMonthsArray();
         $stores = Store::pluck('name', 'id');
         $dining_tables = DiningTable::pluck('name', 'id');
@@ -93,7 +93,8 @@ class CartController extends Controller
                 'attributes' => [
                     'variation_id' => $variation->id,
                     'extra' => true,
-                    'discount' => $product->discount_value
+                    'discount' => $product->discount_value,
+                    'quantity' => $quantity,
                 ],
                 'associatedModel' => $product
             ));
@@ -137,25 +138,34 @@ class CartController extends Controller
             $price = $price - $product_discount;
             $item_exist = \Cart::session($user_id)->get($variation->id);
             // return $item_exist->quantity+$quantity;
+            if(strpos($quantity,',')!==false){
+                $quantity=str_replace(',','.',$quantity);
+            }
             if (!empty($item_exist)) {
+                $attributes=$item_exist->attributes;
+                $attributes['quantity']=strpos($quantity,'.')!==false?number_format((float)$item_exist->attributes->quantity+$quantity, 3, '.'):$item_exist->attributes->quantity+$quantity;
                 \Cart::session($user_id)->update($variation->id, array(
-                    // 'quantity' =>  $item_exist->quantity+$quantity
-                    'quantity' =>  array(
-                        'relative' => false,
-                        'value' => $item_exist->quantity+$quantity
-                    ),
+                    'attributes' =>$attributes
                 ));
+                // \Cart::session($user_id)->update($variation->id, array(
+                //     // 'quantity' =>  $item_exist->quantity+$quantity
+                //     'quantity' =>  array(
+                //         'relative' => false,
+                //         'value' => $item_exist->quantity+$quantity
+                //     ),
+                // ));
             } else {
                 \Cart::session($user_id)->add(array(
                     'id' => $variation->id,
                     'name' => $product->name,
                     'price' => $price,
-                    'quantity' =>  $quantity,
+                    'quantity' =>  1, ///unused quantity
                     'attributes' => [
                         'variation_id' => $variation->id,
                         'extra' => false,
                         'discount' => $product_discount,
                         'size'=>$variation->size->name,
+                        'quantity' => $quantity  ///used quantity
                     ],
                     'associatedModel' => $product
                 ));
@@ -218,19 +228,24 @@ class CartController extends Controller
                 $quantity=str_replace(',','.',$quantity);
             }
             $user_id = Session::get('user_id');
-
-
+            $item_exist = \Cart::session($user_id)->get($product_id);
+            $attributes=$item_exist->attributes;
+            $attributes['quantity']=strpos($quantity,'.')!==false?number_format((float)$quantity, 3, '.'):$quantity;
             \Cart::session($user_id)->update($product_id, array(
-                'quantity' => array(
-                    'relative' => false,
-                    'value' => $quantity
-                ),
+                'attributes' =>$attributes
             ));
+            // \Cart::session($user_id)->update($product_id, array(
+            //     'quantity' => array(
+            //         'relative' => false,
+            //         'value' => $quantity
+            //     ),
+            // ));
 
             $this->cartUtil->createOrUpdateCart($user_id);
-
+            $total=$this->getTotal($user_id);
             $output = [
                 'success' => true,
+                'total'=>$total,
                 'msg' => __('lang.success')
             ];
         } catch (\Exception $e) {
@@ -241,7 +256,7 @@ class CartController extends Controller
             ];
         }
 
-        return redirect()->back()->with('status', $output);
+        return  $output;
     }
     /**
      * update product variation
@@ -301,5 +316,14 @@ class CartController extends Controller
         }
 
         return redirect()->back()->with('status', $output);
+    }
+    public function getTotal($user_id)
+    {
+        $cart_content = \Cart::session($user_id)->getContent();
+        $total=0;
+        foreach ($cart_content as $item){
+            $total+=$item->price * $item->attributes->quantity;
+        }
+        return $total;
     }
 }

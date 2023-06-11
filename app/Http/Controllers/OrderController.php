@@ -89,9 +89,9 @@ class OrderController extends Controller
                     'product_id' => $content->associatedModel->id,
                     'variation_id' => $content->attributes->variation_id,
                     'discount' => $discount,
-                    'quantity' => $content->quantity,
+                    'quantity' => $content->attributes->quantity,
                     'price' => $content->price,
-                    'sub_total' => $content->price * $content->quantity,
+                    'sub_total' => $content->price * $content->attributes->quantity,
                 ];
                 $product = Product::find($content->associatedModel->id);
                 $text .= urlencode($product->name) .'+  +'.$content->attributes->size.'+%3A+' . $order_details['quantity'] . "+%2A+" . $order_details['price'] . '+=+' . $order_details['sub_total'] . " " . session('currency')['code'] . " +%0D%0A+";
