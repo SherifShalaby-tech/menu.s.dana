@@ -275,4 +275,6 @@ return [
     'dinnig_in_restaurant'=>'In The Restaurant ',
     'table_no'=>'Table No',
     'enter_restaurant_store'=>'Enter Restaurant Name',
+
+    'welcome' => 'Welcome',
 ];

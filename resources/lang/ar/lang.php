@@ -253,6 +253,7 @@ return [
      'the_most_interesting_food_in_the_world' => 'الطعام الأكثر إثارة للاهتمام في العالم',
      'Discover_the' => 'اكتشف', 
      'flavors' => 'النكهات',
+     'welcome' => 'أهلاً وسهلاً',
      'of' => 'من', 
      'menu' => 'قائمة الطعام',
      'Welcome_To' => 'مرحبا بك في',
