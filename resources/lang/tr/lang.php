@@ -256,4 +256,5 @@ return [
     'MENU' => 'MENÜ',
     'we_serve' => 'Hizmet ederiz',
     'delicious_food' => 'lezzetli yemek',
+    'welcome'=>'Hoş geldiniz'
 ];

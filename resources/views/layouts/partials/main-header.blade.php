@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col-lg-12 bg-black opacity-70 p-4 animated fadeInDown" data-appear="fadeInDown" data-delay="800">
                 
-                <h1> @lang('lang.Discover_the')<span class="prime-color"> @lang('lang.flavors')</span>  
+                <h1><span class="prime-color"> @lang('lang.welcome')</span>  
                 <span class="style-change">@lang('lang.of') <br><span class="prime-color">  {{ App\Models\System::getProperty('site_title') }}</span> </span></h1>
             </div>
         </div>
