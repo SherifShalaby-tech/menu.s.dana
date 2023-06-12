@@ -230,17 +230,17 @@ input:focus,textarea:focus{
 
 @media (min-width: 768px) and (max-width: 991.98px){
     .main-menu2 ul a{
-        color:#131230 !important
+        /* color:#131230 !important */
     }
 }
 @media (min-width: 576px) and (max-width: 767.98px){
     .main-menu2 ul a{
-        color:#131230 !important
+        /* color:#131230 !important */
     }
 }
 @media (max-width: 575.98px){
     .main-menu2 ul a{
-        color:#131230 !important
+        /* color:#131230 !important */
     }
 }
 .main-menu2 ul ul.sub-menu a{
