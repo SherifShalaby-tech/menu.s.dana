@@ -5,16 +5,15 @@
 
                 <div class="col-md-8">
                     <div class="single-widget single-widget1" style="display: flex;align-items: center;">
-                        <img src="{{ images_asset(asset('uploads/' . session('logo'))) }}" alt="logo" style="width: 110px; height:110px; margin: auto 30px; border-radius: 10px;"> 
-                                    
+                        <img src="{{ images_asset(asset('uploads/' . session('logo'))) }}" alt="logo" style="width: 110px; height:110px; margin: auto 30px; border-radius: 10px;" id="logoxs">
                                         <div class="d-flex">
-                                            <div class="into-icon"> 
-                                            </div> 
+                                            <div class="into-icon">
+                                            </div>
                                             <div class="info-text">
-                                                 <h5 class="mb-4"> @lang('lang.about_us')</h5> 
+                                                 <h5 class="mb-4"> @lang('lang.about_us')</h5>
                                                     <h6>
-                                                         <span class="prime-color">  
-                                                            {{ App\Models\System::getProperty('about_us_footer') }} 
+                                                         <span class="prime-color">
+                                                            {{ App\Models\System::getProperty('about_us_footer') }}
                                                          </span>
                                                     </h6>
                                                     <br>
@@ -66,10 +65,10 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
-            
-            
+
+
      <div class="footer-copyright" style="padding: 0;background: #131230;">
             <div class="row">
                     <div class="col-lg-8 col-md-8"> </div>
@@ -83,15 +82,15 @@
                 </div>
             </div>
     </div>
-    
-    
+
+
         </div>
     </div>
     <div class="footer-copyright">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    <span> 
+                    <span>
                         <a href="https://sherifshalaby.tech/">
                             <p class="text-white text-center">@lang('lang.footer_copyright')</p>
                         </a>

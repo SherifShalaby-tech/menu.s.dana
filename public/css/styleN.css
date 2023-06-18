@@ -11,7 +11,7 @@ h1{
     font-family:"Playfair Display",serif;
     font-size:60px !important;
     font-weight:700;
-   
+
 }
 h2{
     color:#fff;
@@ -117,6 +117,45 @@ input:focus,textarea:focus{
     background-position: 50% 50%;
     background-repeat: no-repeat;
 }
+@media (max-width: 359.5px){
+    #button_xs {
+        align-items: stretch;
+        flex-direction: column
+    }
+    .xs\:text-sm {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+    .footer-widget .single-widget1 {
+         padding-right: 0!important;
+    }
+    #logoxs{
+        margin : auto 15px!important;
+    }
+    .xs\:gap-2 {
+        gap: 0.5rem;
+    }
+    .xs\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .xs\:mt-6 {
+        margin-top: 1.5rem;
+    }
+    .xs\:flex-col {
+        flex-direction: column;
+    }
+    .xs\:px-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .xs\:border-t-2 {
+        border-top-width: 2px;
+    }
+    .xs\:mt-8 {
+        margin-top: 2rem;
+    }
+}
+
 @media (max-width: 1366px){
     .food-area-home img{
         height: 79% !important;
