@@ -56,7 +56,8 @@ class OrderController extends Controller
 
         try {
 
-            $data['sales_note'] = $request->sales_note;
+            $string = trim(preg_replace('/\s+/', ' ', $request->sales_note));
+            $data['sales_note'] = $string;
             $data['store_id'] = env('ENABLE_POS_SYNC')?$request->store_id:0;
             $data['customer_name'] = $request->customer_name;
             $data['phone_number'] = $request->phone_number;
@@ -194,9 +195,10 @@ class OrderController extends Controller
                 'success' => false,
                 'msg' => __('lang.something_went_wrong')
             ];
+            return redirect()->back()->with('status', $output);
         }
 
-        return redirect()->back()->with('status', $output);
+        
     }
 
     /**
