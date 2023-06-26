@@ -235,7 +235,7 @@ return [
     'added_to_the_cart_successfully' => 'Added to the Cart successfully',
 
     'currency' => 'Currency',
-    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00201003836917 - 00905386531059',
+    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00905386531059',
 
     'add_dining_room' => 'Add Dining Room',
     'dining_room_name_already_exist' => 'Dining room name already exists.',
@@ -270,5 +270,11 @@ return [
     'MENU' => 'MENU',
     'we_serve' => 'we serve',
     'delicious_food' => 'delicious food',
+    'default'=>'Default',
+    'products_count'=>'Products Count',
+    'dinnig_in_restaurant'=>'In The Restaurant ',
+    'table_no'=>'Table No',
+    'enter_restaurant_store'=>'Enter Restaurant Name',
 
+    'welcome' => 'Welcome',
 ];

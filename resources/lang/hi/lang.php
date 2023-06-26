@@ -233,7 +233,7 @@ return [
     'added_to_the_cart_successfully' => 'कार्ट में सफलतापूर्वक जोड़ा गया',
 
     'currency' => 'मुद्रा',
-    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00201003836917 - 00905386531059',
+    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00905386531059',
 
     'add_dining_room' => 'भोजन कक्ष जोड़ें',
     'dining_room_name_already_exist' => 'भोजन कक्ष का नाम पहले से मौजूद है।',

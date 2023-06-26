@@ -148,19 +148,25 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                         @endforeach
                     </select>
                 </div>
+                @if(env('ENABLE_POS_SYNC'))
                 <div class="flex flex-row justify-center mt-4">
                     <select id="store_id" name="store_id" required
-                        class="w-1/2 mx-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                         dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="w-1/2 mx-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                           @if(count($stores)==1)
                         @foreach ($stores as $id => $store)
                             <option value="{{ $id }}">{{ $store }}</option>
                         @endforeach
+                        @else
+                        <option selected value="">@lang('lang.enter_restaurant_store')</option>
+                        @foreach ($stores as $id => $store)
+                            <option value="{{ $id }}">{{ $store }}</option>
+                        @endforeach
+                        @endif
                     </select>
 
-
                 </div>
-  
+                @endif
+
 
             </div>
 
@@ -170,14 +176,17 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                         <div class="flex-col justify-center py-4">
                             <div class="flex @if ($locale_direction == 'rtl') flex-row-reverse @else flex-row @endif ">
                                 <div class="w-1/2 @if ($locale_direction == 'rtl') text-right @else text-left @endif">
-                                    <h3 class="font-semibold text-lg text-dark">{{ $item->name }}</h3>
+                                    <h5 class="font-semibold text-lg text-dark">{{ $item->name }}</h5>
+                                </div>
+                                <div class="w-1/2 @if ($locale_direction == 'rtl') text-right @else text-left @endif">
+                                    <h6 class="font-semibold text-lg text-dark">{{$item->attributes->size?$item->attributes->size:'' }}</h6>
                                 </div>
                                 <div class="md:w-1/3 xs:w-5/12">
                                     <div class="flex flex-row qty_row justify-center w-full">
                                         <button type="button"
                                             class="minus border-2 rounded-full text-lg text-center border-dark text-dark h-8 w-8">-</button>
-                                        <input type="text" data-id="{{ $item->id }}" value="{{ $item->quantity }}"
-                                            class="quantity text-center text-dark w-16 line leading-none border-transparent bg-transparent focus:border-transparent focus:ring-0 ">
+                                        <input type="text" data-id="{{ $item->id }}" value="{{ $item->attributes->quantity }}"
+                                            class="quantity text-center text-dark w-24 line leading-none border-transparent bg-transparent focus:border-transparent focus:ring-0 ">
                                         <button type="button"
                                             class="plus border-2 rounded-full text-lg text-center border-dark text-dark h-8 w-8">+</button>
                                     </div>
@@ -193,12 +202,13 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                             <p class="text-xs text-dark font-semibold">{!! $item->associatedModel->product_details !!}</p>
                             <h3
                                 class="font-semibold text-base text-dark py-2 @if ($item->associatedModel->variations->first()->name == 'Default') hidden @endif">
-                                @lang('lang.select_size')</h3>
-                            @foreach ($item->associatedModel->variations as $variation)
-                                @if (!empty($variation->size))
-                                    <div
+                                {{-- @lang('lang.select_size')</h3> --}}
+                        </h3>
+                                @foreach ($item->associatedModel->variations as $variation)
+                                @if ( $variation->id==$item->attributes->variation_id)
+                                <div
                                         class="flex @if ($locale_direction == 'rtl') flex-row-reverse @else flex-row @endif ">
-                                        <div class="flex-1">
+                                        {{-- <div class="flex-1">
                                             <div
                                                 class="flex @if ($locale_direction == 'rtl') flex-row-reverse @else flex-row @endif items-center mb-4">
                                                 <input type="radio" data-id="{{ $item->id }}"
@@ -209,16 +219,18 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                                 <label for="radio"
                                                     class="block ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 px-2">
                                                     @if ($variation->name == 'Default')
-                                                        {{ $item->name }}
+                                                        @lang('lang.default')
                                                     @else
                                                         {{ $variation->size->name ?? '' }}
                                                     @endif
                                                 </label>
                                             </div>
-                                        </div>
+                                        </div> --}}
+                                        {{-- {{$item}} --}}
                                         <div
                                             class="flex-1 text-base text-dark @if ($locale_direction == 'rtl') text-left @else text-right @endif font-semibold">
-                                            {{ @num_format($variation->default_sell_price - $item->attributes->discount) }}<span
+                                            {{ @num_format($variation->default_sell_price - $item->attributes->discount) }}
+                                            <span
                                                 class="font-bold">
                                                 {{ session('currency')['code'] }}</span>
                                         </div>
@@ -257,10 +269,10 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
             </div>
         </div>
 
-        <div class="flex justify-center">
+        <div class="flex justify-center" id="button_xs">
             <button type="button" class="lg:w-1/4 md:w-1/2 xs:w-full h-10 mt-4 rounded-lg  bg-red text-white relative"
                 id="send_the_order">@lang('lang.send_the_order')
-                <span class="text-white text-base absolute right-2">{{ @num_format($total) }}
+                <span class="text-white text-base absolute right-2 order-total-price">{{ @num_format($total) }}
                     {{ session('currency')['code'] }}</span></button>
         </div>
 
@@ -301,8 +313,13 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
             let product_id = $(this).data('id');
             let quantity = $(this).val();
 
-            window.location.href = base_path + "/cart/update-product-quantity/" + product_id + "/" +
-                quantity;
+            $.ajax({
+                type: "GET",
+                url: "/cart/update-product-quantity/" + product_id + "/" +quantity,
+                success: function (response) {
+                    $('.order-total-price').text(response.total);
+                }
+            });
 
         })
 

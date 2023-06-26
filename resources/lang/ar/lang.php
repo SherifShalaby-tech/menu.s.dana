@@ -78,7 +78,7 @@ return [
     'filter' => 'منقي',
     'active' => 'نشيط',
     'deactivated' => 'معطل',
-    'sort' => 'نوع',
+    'sort' => 'الترتيب',
     'create_offer' => 'إنشاء عرض',
     'products' => 'منتجات',
     'start_date' => 'تاريخ البدء',
@@ -230,7 +230,7 @@ return [
     'added_to_the_cart_successfully' => 'تم الإضافة لعربة التسوق',
 
     'currency' => 'عملة',
-    'footer_copyright' => ' 00201003836917 - 
+    'footer_copyright' => ' 
     00905386531059 - تمت البرمجة بكل فخر في شريف شلبي التقنية، 0097433231457',
 
     'add_dining_room' => 'أضف صالة طعام',
@@ -253,11 +253,18 @@ return [
      'the_most_interesting_food_in_the_world' => 'الطعام الأكثر إثارة للاهتمام في العالم',
      'Discover_the' => 'اكتشف', 
      'flavors' => 'النكهات',
+     'welcome' => 'أهلاً وسهلاً',
      'of' => 'من', 
      'menu' => 'قائمة الطعام',
      'Welcome_To' => 'مرحبا بك في',
     'MENU' => 'قائمة طعام',
     'we_serve' => 'نحن نخدم',
     'delicious_food' => 'طعام لذيذ',
-
+    'default'=>'مقاس عادى',
+    'products_count'=>'عدد المنتجات',
+    'dinnig_in_restaurant'=>'داخل المطعم',
+    'table_no'=>'طاولة رقم',
+    'enter_restaurant_store'=>'ادخل اسم المطعم',
+    'Are you sure?'=>'هل متأكد من حذف الصورة',
+    'Your Image has been deleted.'=>'تم حذف الصورة',
 ];

@@ -233,7 +233,7 @@ return [
     'added_to_the_cart_successfully' => 'Ajouté au panier avec succès',
 
     'currency' => 'devise',
-    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00201003836917 - 00905386531059',
+    'footer_copyright' => 'Proudly developed at Sherifshalaby.tech, 0097433231457 - 00905386531059',
 
     'add_dining_room' => 'Ajouter une salle à manger',
     'dining_room_name_already_exist' => 'Le nom de la salle à manger existe déjà.',

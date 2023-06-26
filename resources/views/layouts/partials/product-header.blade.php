@@ -5,7 +5,7 @@
 
 
 <section class="banner-area banner-area2 menu-bg text-center"
- style="height: 200px; background-image: url('@if(!empty(session('breadcrumb_background_image'))){{ asset('uploads/' . session('breadcrumb_background_image')) }}@else{{ asset('images/default-breadcrumb-bg.png') }}@endif');" >
+ style="height: 200px; background-image: url('@if(!empty(session('breadcrumb_background_image'))){{ images_asset(asset('uploads/' . session('breadcrumb_background_image'))) }}@else{{ asset('images/default-breadcrumb-bg.png') }}@endif');" >
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
