@@ -10,9 +10,8 @@
                 <div class="flex flex-row items-center @if ($product->getMedia('product')->count() == 0) xs:hidden @endif">
                     <div class="block w-20 flex-3 md:block xs:hidden ">
                         <div class="owl-nav">
-                            <div class="prev-nav">
-                                <img src="{{ asset('images/slider-arrow-left.png') }}" alt="" class="m-auto">
-                            </div>
+
+
                         </div>
                     </div>
                     <div class="flex-1 ">
@@ -25,9 +24,7 @@
                     </div>
                     <div class="justify-center block w-20 flex-3 md:block xs:hidden">
                         <div class="owl-nav">
-                            <div class="next-nav">
-                                <img src="{{ asset('images/slider-arrow-right.png') }}" alt="" class="m-auto">
-                            </div>
+                          
                         </div>
                     </div>
                 </div>
