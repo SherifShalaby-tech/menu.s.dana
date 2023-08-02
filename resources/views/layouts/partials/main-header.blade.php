@@ -45,7 +45,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
         <div class="row">
             <div class="p-4 col-lg-12  animated fadeInDown @if ($locale_direction == 'rtl') @endif text-end" data-appear="fadeInDown" data-delay="800">
 
-                <p class="header-text" style="text-shadow: 3px 3px #000;"><span class="text-white"> @lang('lang.welcome')</span>
+                <p class="header-text" style="text-shadow: 3px 3px #000;"><span class="text-white"> gggg  @lang('lang.welcome')</span>
                 <span class="text-white style-change">@lang('lang.of') <br><span class="prime-color">  {{ App\Models\System::getProperty('site_title') }}</span> </span></p>
             </div>
         </div>
