@@ -139,7 +139,7 @@ input:focus,textarea:focus{
 }
 .food-area .product-img img{
     width: 100%;
-    height: 330px;
+    height: 100%;
     background-size: cover;
     background-position: 50% 50%;
     background-repeat: no-repeat;
@@ -193,7 +193,7 @@ input:focus,textarea:focus{
         height: 180px !important;
     }
     .food-area .product-img img{
-        height: 225px !important;
+        height: 100% !important;
     }
 }
 @media (min-width: 991px) and (max-width: 1440px){
@@ -213,7 +213,7 @@ input:focus,textarea:focus{
         height: 120px !important;
     }
     .food-area .product-img img{
-        height: 160px !important;
+        height: 100% !important;
     }
 }
 @media (max-width: 575.98px){
@@ -227,7 +227,7 @@ input:focus,textarea:focus{
         padding: 5px !important;
 }
       .food-area .product-img img{
-        height: 170px !important;
+        height: 100% !important;
     }
 }
 .main-menu ul li{
@@ -282,7 +282,7 @@ input:focus,textarea:focus{
     transition:.5s
 }
 .main-menu ul li ul.sub-menu li{
-    display:block
+    display:block;
 }
 .main-menu ul li ul.sub-menu li a{
     -webkit-transition:.3s;
@@ -294,20 +294,21 @@ input:focus,textarea:focus{
     color:#ffb606
 }
 
-@media (min-width: 768px) and (max-width: 991.98px){
-    .main-menu2 ul a{
-        /* color:#131230 !important */
-    }
-}
-@media (min-width: 576px) and (max-width: 767.98px){
-    .main-menu2 ul a{
-        /* color:#131230 !important */
-    }
-}
 @media (max-width: 575.98px){
     .main-menu2 ul a{
         padding: 3px !important;
     }
+    .main-menu ul li ul.sub-menu li a p{
+       font-size: small !important;
+}
+.main-menu ul li ul.sub-menu li{
+  width: 30vw;
+  margin: 0 !important;
+}
+.main-menu ul li ul.sub-menu {
+  width: fit-content !important;
+  left: -28vw !important;
+}
 }
 .main-menu2 ul ul.sub-menu a{
     color:#131230 !important

@@ -6,7 +6,7 @@
                 <div class="col-md-8">
                     <div class="single-widget single-widget1 row" style="display: flex;align-items: center;">
 
-                        <img src="{{ images_asset(asset('uploads/' . session('logo'))) }}" alt="logo" style="width: 60px; height:100px; margin: auto 30px; border-radius: 10px;" id="logoxs" class="pb-3 col-3">
+                        <img src="{{ images_asset(asset('uploads/' . session('logo'))) }}" alt="logo" style="width: 60px; height:100%; margin: auto 30px; border-radius: 10px;" id="logoxs" class="pb-3 col-3">
 
                         <div class="text-center d-flex col-6">
                                             <div class="into-icon">

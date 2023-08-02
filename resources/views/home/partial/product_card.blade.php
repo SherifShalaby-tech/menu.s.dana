@@ -22,7 +22,7 @@ if($product->variations->where('name','!=','Default')->count()>0){
                     <div>
                     <a href="{{ action('ProductController@show', $product->id) }}">
                          <!-- class d-flex justify-content-between -->
-                        <h5 class="text-center">{{ Str::limit($product->name, 15) }}</h5>
+                        <h6 class="text-center text-dark">{{ Str::limit($product->name, 25) }}</h6>
                         </a>
                             <span class="style-change sm:flex sm:justify-between" style=" align-items: center;">
                                 @foreach($variation_products as $s)
