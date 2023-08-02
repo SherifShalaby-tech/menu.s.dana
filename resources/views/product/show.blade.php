@@ -24,23 +24,23 @@
                     </div>
                     <div class="justify-center block w-20 flex-3 md:block xs:hidden">
                         <div class="owl-nav">
-                          
+
                         </div>
                     </div>
                 </div>
 
 
             </div>
-            <div class="flex-1 xs:w-full lg:w-1/2">
+            <div class="flex-1 text-center xs:w-full lg:w-1/2">
                 <div class="flex flex-col px-16 py-8 bg-white opacity-70">
                     <div class="flex-1">
-                        <h3 class="text-2xl font-bold">{{ $product->name }}</h3>
-                        <h5 class="py-2 text-gray-600">{!! $product->product_details !!}</h5>
+                        <h5 class="text-2xl font-bold text-gray">{{ $product->name }}</h5>
+                        <h5 class="py-2 text-gray-600 text-gray">{!! $product->product_details !!}</h5>
                     </div>
-                    <div class="flex-1 pt-4">
+                    <div class="flex-1 pt-1">
                         <div class="flex flex-col">
                             <div class="flex-1">
-                                <h3 class="text-xl font-bold">
+                                <h5 class="text-xl font-bold text-gray">
                                     @if (!empty($product->discount_value) && $product->discount_value > 0)
                                         <span
                                             class="mr-4 text-gray-600 strikethrough">{{ @num_format($product->sell_price) }}
@@ -52,13 +52,13 @@
                                     @break
                                     @endforeach
                                     {{ session('currency')['code'] }}
-                                </h3>
+                                </h5>
                             </div>
                         </div>
                     </div>
                     <div class="flex-1 pt-4">
-                        <div class="flex flex-col">
-                            <div class="flex-1">
+                        <div class="flex flex-col ">
+                            <div class="flex-1 ">
                                 @if($product->variations->where('name','!=','Default')->count()>=1)
                                     @foreach($product->variations->where('name','!=','Default') as $size)
                                         <input type="hidden" value="{{$size->id}}" name="variatioId" class="variatioId"/>
@@ -81,10 +81,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex-1 pt-4">
+                    <div class="flex-1 pt-4 text-center">
                         <div class="flex flex-col">
-                            <div class="flex-1">
-                                <div class="flex flex-row">
+                            <div class="flex-1 text-center ">
+                                <div class="flex flex-row justify-content-center">
                                     <button
                                         class="w-8 h-8 text-lg text-center border-2 rounded-full minus border-dark text-dark">-</button>
                                     <input type="quantity" value="1"
@@ -92,7 +92,7 @@
                                     <button
                                         class="w-8 h-8 text-lg text-center border-2 rounded-full plus border-dark text-dark">+</button>
                                 </div>
-                                <div class="flex">
+                                <div class="flex text-center justify-content-center">
                                     <span id="addToCart" style="cursor:pointer"
                                         class="px-4 py-2 mt-4 font-semibold text-white rounded-lg add_to_cart_btn bg-red ">@lang('lang.add_to_cart')</span>
                                 </div>
