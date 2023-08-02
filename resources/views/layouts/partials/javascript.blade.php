@@ -22,4 +22,15 @@ $moment_time_format = 'hh:mm A';
 <script src="{{ asset('js/vendor/owl-carousel.min.js') }}"></script>
 <script src="{{ asset('js/vendor/jquery.datetimepicker.full.min.js') }}"></script>
 <script src="{{ asset('js/vendor/jquery.nice-select.min.js') }}"></script>
+
+<!-- Main JS Bootstrap File -->
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- FontAwesome Js File -->
+<script src="{{ asset('js/all.min.js') }}"></script>
+
+<!-- Main JS Swiper File -->
+<script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
+
+<!-- Main Js File -->
 <script src="{{ asset('js/main.js') }}"></script>
