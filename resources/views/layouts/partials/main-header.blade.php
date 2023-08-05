@@ -37,8 +37,7 @@
 </header>
 
 
-<section class="banner-area text-center"  style="background-image: urlcenter"
-style="height: 542px; background-size: 100% 100%; background-image: url('{{ asset('uploads/' . session('home_background_image'))">
+<section class="banner-area text-center"  style="background-image: url('asset('uploads/' . session('home_background_image')))">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 bg-black opacity-70 p-4 animated fadeInDown" data-appear="fadeInDown" data-delay="800">
