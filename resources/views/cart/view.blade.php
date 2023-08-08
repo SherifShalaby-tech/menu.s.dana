@@ -170,36 +170,38 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
 
             </div>
 
-            <div class="flex-1 xl:px-16 lg:px-2 md:px-4 xs:px-4 xs:mt-8 xs:border-t-2">
+            <div class="flex-1 xl:px-16 lg:px-2 md:px-4 xs:px-2 xs:mt-8 xs:border-t-2">
                 @foreach ($cart_content as $item)
                     @if ($item->attributes->extra != 1)
-                        <div class="flex-col justify-center py-4">
+                        <div class="flex-col justify-center py-5">
                             <div class="flex @if ($locale_direction == 'rtl') flex-row-reverse @else flex-row @endif ">
                                 <div class="w-1/2 @if ($locale_direction == 'rtl') text-right @else text-left @endif">
-                                    <h5 class="text-lg font-semibold text-dark">{{ $item->name }}</h5>
+                                    <p class="font-semibold text-tiny text-dark">{{ $item->name }}</ح>
                                 </div>
-                                <div class="w-1/2 @if ($locale_direction == 'rtl') text-right @else text-left @endif">
-                                    <h6 class="text-lg font-semibold text-dark">{{$item->attributes->size?$item->attributes->size:'' }}</h6>
-                                </div>
+
                                 <div class="md:w-1/3 xs:w-5/12">
                                     <div class="flex flex-row justify-center qty_row">
                                         <button type="button"
-                                            class="w-8 h-8 px-2 mt-2 text-lg text-center border-2 rounded-full minus border-dark text-dark">-</button>
+                                            class="px-2 text-lg text-center rounded-full h-68 w- minus border-dark text-dark">-</button>
                                         <input type="text" data-id="{{ $item->id }}" value="{{ $item->attributes->quantity }}"
-                                            class="w-10 leading-none text-center bg-transparent border-transparent quantity text-dark line focus:border-transparent focus:ring-0 ">
+                                            class="w-8 p-0 text-center bg-transparent border-transparent leding-none quantity text-dark line focus:border-transparent focus:ring-0 ">
                                         <button type="button"
-                                            class="w-8 h-8 mt-2 text-lg text-center border-2 rounded-full plus border-dark text-dark">+</button>
+                                            class="w-6 h-8 text-lg text-center rounded-full plus border-dark text-dark">+</button>
                                     </div>
                                 </div>
 
                                 <div
+
                                     class="md:w-1/6 xs:w-1/12 text-dark  @if ($locale_direction == 'rtl') text-left @else text-right @endif ">
                                     <a href="{{ action('CartController@removeProduct', $item->id) }}"
-                                        class="w-8 h-8 text-lg text-center rounded-full border-lightgrey text-rose-700 x-cansel">
+                                        class="w-8 h-8 text-lg text-center border-2 rounded-full border-lightgrey text-rose-700 x-cansel">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
                             </div>
+                            <div class="w-full mx-0 @if ($locale_direction == 'rtl') text-right @else text-left @endif">
+                                    <p class="w-full font-semibold text-tiny text-dark">{{$item->attributes->size?$item->attributes->size:'' }}</p>
+                                </div>
                             <p class="text-xs font-semibold text-dark">{!! $item->associatedModel->product_details !!}</p>
                             <h3
                                 class="font-semibold text-base text-dark py-2 @if ($item->associatedModel->variations->first()->name == 'Default') hidden @endif">
@@ -236,6 +238,7 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                                 {{ session('currency')['code'] }}</span>
                                         </div>
                                     </div>
+                                    <hr>
                                 @endif
                             @endforeach
                         </div>
@@ -272,8 +275,8 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
 
         <div class="flex justify-center" id="button_xs">
             <button type="button" class="relative h-10 mt-4 text-white rounded-lg lg:w-1/4 md:w-1/2 xs:w-full bg-red"
-                id="send_the_order">@lang('lang.send_the_order')
-                <span class="absolute text-base text-white right-2 order-total-price">{{ @num_format($total) }}
+                id="send_the_order">@lang('lang.send_the_order')  &nbsp; &nbsp; &nbsp;
+                <span class="absolute text-base text-white ms-3 right-2 order-total-price">{{ @num_format($total) }}
                     {{ session('currency')['code'] }}</span></button>
         </div>
 
