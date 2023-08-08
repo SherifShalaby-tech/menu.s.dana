@@ -13,9 +13,9 @@ if($product->variations->where('name','!=','Default')->count()>0){
                 @break
             @endforeach
             <div class="single-food">
-                <div class="food-img product-img">
+                <div class="food-img product-img" style="    aspect-ratio: 1/1;">
                     <a href="{{ action('ProductController@show', $product->id) }}">
-                    <img src="{{ images_asset($product->getFirstMediaUrl('product')) }}" class="img-fluid" alt="">
+                    <img src="{{ images_asset($product->getFirstMediaUrl('product')) }}" class="img-fluid" alt=""  style="aspect-ratio: 1/1;">
                     </a>
                 </div>
                 <div class="food-content test-center">

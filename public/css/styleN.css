@@ -551,7 +551,9 @@ input:focus,textarea:focus{
     -webkit-transition:.5s;
     -moz-transition:.5s;
     -o-transition:.5s;
-    transition:.5s
+    transition:.5s;
+    -ms-transition:.5s;
+    aspect-ratio: 1/1;
 }
 .food-area .food-content{
     padding:10px 5px 5px 5px;
@@ -2838,11 +2840,27 @@ font-weight: 700 !important ;
 .aboutUs:nth-child(3) span{
 background-color: transparent !important;
 }
-.x-cansel{
-  position: absolute;
-  transform: translate(-39px ,0);
-  -webkit-transform: translate(-39px ,0);
-  -moz-transform: translate(-39px ,0);
-  -ms-transform: translate(-39px ,0);
-  -o-transform: translate(-39px ,0);
+
+
+@media (max-width:991px) {
+    .x-cansel{
+        position: absolute;
+        transform: translate(-10px ,0);
+        -webkit-transform: translate(-10px ,0);
+        -moz-transform: translate(-10px ,0);
+        -ms-transform: translate(-10px ,0);
+        -o-transform: translate(-10px ,0);
+}
+
+}
+@media (max-width:361px) {
+    .x-cansel{
+        position: absolute;
+        transform: translate(-45px ,0) !important;
+        -webkit-transform: translate(-45px ,0) !important;
+        -moz-transform: translate(-45px ,0) !important;
+        -ms-transform: translate(-45px ,0) !important;
+        -o-transform: translate(-45px ,0) !important;
+}
+
 }
