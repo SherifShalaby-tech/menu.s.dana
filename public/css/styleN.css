@@ -360,6 +360,7 @@ input:focus,textarea:focus{
 .header-area{
     color: #fffdfd !important;
     padding-top:10px;
+    padding-bottom:10px;
     background:#6d6d6d55;
     position:absolute;
     top:20px;
