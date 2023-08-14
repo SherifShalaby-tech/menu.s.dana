@@ -259,6 +259,9 @@ class ProductController extends Controller
         $data['discount_start_date'] = !empty($data['discount_start_date']) ? $this->commonUtil->uf_date($data['discount_start_date']) : null;
         $data['discount_end_date'] = !empty($data['discount_end_date']) ? $this->commonUtil->uf_date($data['discount_end_date']) : null;
         $data['active'] = !empty($data['active']) ? 1 : 0;
+        if(env('ENABLE_POS_SYNC')){
+            $data['barcode_type'] = !empty($data['barcode_type']) ? $data['barcode_type'] : 'C128';
+        }
         $data['created_by'] = auth()->user()->id;
         $data['type'] = !empty($request->this_product_have_variant) ? 'variable' : 'single';
         $data['translations'] = !empty($data['translations']) ? $data['translations'] : [];

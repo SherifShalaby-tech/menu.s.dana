@@ -127,7 +127,9 @@ class ProductUtil extends Util
                     $variation->size_id = $v['size_id'] ?? null;
                     $variation->default_purchase_price = !empty($v['default_purchase_price']) ? $this->num_uf($v['default_purchase_price']) : $this->num_uf($product->purchase_price);
                     $variation->default_sell_price = !empty($v['default_sell_price']) ? $this->num_uf($v['default_sell_price']) : $this->num_uf($product->sell_price);
-                    $variation->pos_model_id = $v['pos_model_id'] ?? null;
+                    if(!env('ENABLE_POS_SYNC')){
+                        $variation->pos_model_id = $v['pos_model_id'] ?? null;
+                    }
                     $variation->save();
 
                     $keey_variations[] = $variation->id;
@@ -139,7 +141,9 @@ class ProductUtil extends Util
                     $variation_data['default_purchase_price'] = !empty($v['default_purchase_price']) ? $this->num_uf($v['default_purchase_price']) : $this->num_uf($product->purchase_price);
                     $variation_data['default_sell_price'] = !empty($v['default_sell_price']) ? $this->num_uf($v['default_sell_price']) : $this->num_uf($product->sell_price);
                     $variation_data['is_dummy'] = 0;
-                    $variation_data['pos_model_id'] = $v['pos_model_id'] ?? null;
+                    if(!env('ENABLE_POS_SYNC')){
+                        $variation_data['pos_model_id'] = $v['pos_model_id'] ?? null;
+                    }
                     $variation = Variation::create($variation_data);
                     $keey_variations[] = $variation->id;
                 }
