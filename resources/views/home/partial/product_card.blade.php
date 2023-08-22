@@ -13,9 +13,9 @@ if($product->variations->where('name','!=','Default')->count()>0){
                 @break
             @endforeach
             <div class="single-food">
-                <div class="food-img  product-img">
-                    <a href="{{ action('ProductController@show', $product->id) }}">
-                    <img src="{{ images_asset($product->getFirstMediaUrl('product')) }}" class="img-fluid" alt="">
+                <div class="food-img  product-img"  style="    aspect-ratio: 1/1;" >
+                    <a href="{{ action('ProductController@show', $product->id) }}" style="    aspect-ratio: 1/1;">
+                    <img src="{{ images_asset($product->getFirstMediaUrl('product')) }}" class=""  style="    aspect-ratio: 1/1;" alt="">
                     </a>
                 </div>
                 <div class="food-content">
@@ -26,19 +26,19 @@ if($product->variations->where('name','!=','Default')->count()>0){
                         </a>
                             <span class="style-change sm:flex sm:justify-between" style=" align-items: center;">
                                 @foreach($variation_products as $s)
-                                <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal{{$product->id}}" class="size-btn inline-flex items-center text-center  bg-gray-900 rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                                <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal{{$product->id}}" class="size-btn inline-flex items-center text-center  bg-gray-900 rounded-lg hover:bg-gray-600 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                                     @if($s->size_id!==null)
                                     <span>
                                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path></svg>
                                     </span>
-                                    @endif 
+                                    @endif
                                     &nbsp;
                                     <span class="size-menu">{{$s->size->name}}</span>
-                                    
-                                        
-                                        
+
+
+
                                 </button>
-                                
+
                                 <!-- Dropdown menu -->
                                 <div id="dropdownDotsHorizontal{{$product->id}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
@@ -52,14 +52,14 @@ if($product->variations->where('name','!=','Default')->count()>0){
                                 </div>
                                 <span>
                                     {{ session('currency')['code'] }}
-                                    <span class="sell-price"> 
+                                    <span class="sell-price">
                                         {{ @num_format($s->default_sell_price - $product->discount_value) }}
                                     </span>
-                                    
+
                                 </span>
-                              
+
                             @break
-                            @endforeach 
+                            @endforeach
                                 <p style="text-align: center; margin-top: 0;margin-bottom: 0rem;">
                                     <button data-product_id="{{ $product->id }}" type="button" style="font-size: 30px;"
                                         class="text-red hover:bg-red hover:text-white transition-all  cart_button">
@@ -68,7 +68,7 @@ if($product->variations->where('name','!=','Default')->count()>0){
                                 </p>
                             </span>
                         </div>
-                    
+
 
                 </div>
             </div>
