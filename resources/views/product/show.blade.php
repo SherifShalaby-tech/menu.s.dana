@@ -10,9 +10,9 @@
                 <div class="flex flex-row items-center @if ($product->getMedia('product')->count() == 0) xs:hidden @endif">
                     <div class="flex-3 w-20 block md:block xs:hidden ">
                         <div class="owl-nav">
-                            <div class="prev-nav">
+                            <!-- <div class="prev-nav">
                                 <img src="{{ asset('images/slider-arrow-left.png') }}" alt="" class="m-auto">
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="flex-1 ">
@@ -25,9 +25,9 @@
                     </div>
                     <div class="flex-3 w-20 block md:block xs:hidden  justify-center">
                         <div class="owl-nav">
-                            <div class="next-nav">
+                            <!-- <div class="next-nav">
                                 <img src="{{ asset('images/slider-arrow-right.png') }}" alt="" class="m-auto">
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                                             class="strikethrough text-gray-600 mr-4">{{ @num_format($product->sell_price) }}
                                             {{ session('currency')['code'] }} </span>
                                     @endif
-                                       
+
                                     @foreach($product->variations->where('name','!=','Default') as $size)
                                     <span class="sell_price">{{ @num_format($size->default_sell_price - $product->discount_value) }}</span>
                                     @break
@@ -174,7 +174,7 @@
                     }else{
                         swal.fire("@lang('lang.error')!", response.status.msg, "error");
                     }
-                    
+
                     $('.cart_items_page').load(document.URL +  ' .cart_items_page');
                     $('.cart_items').load(document.URL +  ' .cart_items');
                     $('.total').load(document.URL +  ' .total');

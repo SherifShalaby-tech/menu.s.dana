@@ -192,9 +192,9 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                     </div>
                                 </div>
                                 <div
-                                    class="md:w-1/6 xs:w-1/12 text-dark  @if ($locale_direction == 'rtl') text-left @else text-right @endif ">
+                                    class="md:w-1/6 xs:w-1/12 text-dark  @if ($locale_direction == 'rtl') text-left @else text-right @endif mx-4 ">
                                     <a href="{{ action('CartController@removeProduct', $item->id) }}"
-                                        class="mt-2 rounded-full text-lg text-center border-lightgrey text-rose-700 h-8 w-8">
+                                        class="mt-2 rounded-full text-lg text-center border-rose-700 text-rose-700 border-1 h-8 w-8 bg-red-200   x-cansel">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>
