@@ -2757,3 +2757,13 @@ h6{
 .cl0{
     color: #fff;
 }
+.x-cansel{
+ background-color: rgb(246, 178, 178);
+ border-radius: 50%;
+ -webkit-border-radius: 50%;
+ -moz-border-radius: 50%;
+ -ms-border-radius: 50%;
+ -o-border-radius: 50%;
+ border: 2px solid red;
+ padding:0 4px;
+}
