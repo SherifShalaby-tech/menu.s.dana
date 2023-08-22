@@ -23,7 +23,7 @@
 <style>
     .fadeInDown {
   animation-name: fadeInDown;
-  
+
 }
 .animated {
   animation-duration: 1s;
@@ -41,9 +41,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 bg-black opacity-70 p-4 animated fadeInDown" data-appear="fadeInDown" data-delay="800">
-                
-                <h1><span class="prime-color"> @lang('lang.welcome')</span>  
-                <span class="style-change">@lang('lang.of') <br><span class="prime-color">  {{ App\Models\System::getProperty('site_title') }}</span> </span></h1>
+
+                <h6><span class="prime-color"> @lang('lang.welcome')</span>
+                <span class="style-change">@lang('lang.of') <br><span class="prime-color">  {{ App\Models\System::getProperty('site_title') }}</span> </span></h6>
             </div>
         </div>
     </div>
