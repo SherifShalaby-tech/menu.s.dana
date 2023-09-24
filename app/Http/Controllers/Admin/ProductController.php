@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Facades\App;
 class ProductController extends Controller
 {
     /**
@@ -75,7 +75,7 @@ class ProductController extends Controller
                     if (!empty($image)) {
                         return '<img src="' . $image . '" height="50px" width="50px">';
                     } else {
-                        return '<img src="' . images_asset(asset('/uploads/' . session('logo'))) . '" height="50px" width="50px">';
+                        return '<img src="' . images_asset() . '" height="50px" width="50px">';
                     }
                 })
                 ->editColumn('category', function ($row) {
@@ -218,7 +218,15 @@ class ProductController extends Controller
         }
 
 
-        $categories = ProductClass::orderBy('name', 'asc')->pluck('name', 'id');
+        $locale = App::getLocale();
+        $categories = ProductClass::orderBy('name', 'asc')
+        ->get();
+        $categories = $categories->map(function ($category) use ($locale) {
+            return [
+                'id' => $category->id,
+                'name' => $category->translations->name->$locale ?? $category->name
+            ];
+        })->pluck('name', 'id');
 
         return view('admin.product.index')->with(compact(
             'categories',
@@ -236,7 +244,15 @@ class ProductController extends Controller
             abort(403, __('lang.not_authorized'));
         }
 
-        $categories = ProductClass::orderBy('name', 'asc')->pluck('name', 'id');
+        $locale = App::getLocale();
+        $categories = ProductClass::orderBy('name', 'asc')
+        ->get();
+        $categories = $categories->map(function ($category) use ($locale) {
+            return [
+                'id' => $category->id,
+                'name' => $category->translations->name->$locale ?? $category->name
+            ];
+        })->pluck('name', 'id');
         $sizes = Size::orderBy('created_at', 'desc')->pluck('name', 'id');
 
         return view('admin.product.create')->with(compact(
@@ -255,6 +271,7 @@ class ProductController extends Controller
         
         $data = $request->except('_token', 'image');
         $data['sku'] = $this->productUtil->generateProductSku($data['name']);
+        $data['name'] = empty($data['name']) ?$data['name'] : ' ';
         if(empty($request->variations)){
             $data['purchase_price'] = !empty($data['purchase_price']) ? $data['purchase_price'] : 0;
             $data['sell_price'] = $data['sell_price'];
@@ -341,7 +358,15 @@ class ProductController extends Controller
         }
 
         $product = Product::find($id);
-        $categories = ProductClass::orderBy('name', 'asc')->pluck('name', 'id');
+        $locale = App::getLocale();
+        $categories = ProductClass::orderBy('name', 'asc')
+        ->get();
+        $categories = $categories->map(function ($category) use ($locale) {
+            return [
+                'id' => $category->id,
+                'name' => $category->translations->name->$locale ?? $category->name
+            ];
+        })->pluck('name', 'id');
         $sizes = Size::orderBy('created_at', 'desc')->pluck('name', 'id');
 
 
@@ -363,6 +388,7 @@ class ProductController extends Controller
     {
         try {
             $data = $request->except('_token', '_method', 'image');
+            $data['name'] = empty($data['name']) ?$data['name'] : ' ';
             if(!empty($request->variations) && count($request->variations)==1){
                 if(!empty($request->variations)){
                     foreach ($request->variations as $v) {

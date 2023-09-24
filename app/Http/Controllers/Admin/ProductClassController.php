@@ -51,7 +51,7 @@ class ProductClassController extends Controller
         if (request()->ajax()) {
 
             $product_classes = ProductClass::leftJoin("products","products.product_class_id","=","product_classes.id")
-            ->groupBy('product_classes.id')->orderBy('product_classes.sort')->orderBy('product_classes.created_at','desc');
+            ->groupBy('product_classes.id','product_classes.name','product_classes.description','product_classes.translations','product_classes.sort','product_classes.status','product_classes.pos_model_id','product_classes.created_at','product_classes.updated_at')->orderBy('product_classes.sort')->orderBy('product_classes.created_at','desc');
 
 
             $product_classes = $product_classes->selectRaw(
@@ -66,7 +66,7 @@ class ProductClassController extends Controller
                     if (!empty($image)) {
                         return '<img src="' . $image . '" height="50px" width="50px">';
                     } else {
-                        return '<img src="' . images_asset(asset('/uploads/' . session('logo'))) . '" height="50px" width="50px">';
+                        return '<img src="' . images_asset() . '" height="50px" width="50px">';
                     }
                 })
                 ->editColumn('status', function ($row) {
@@ -172,6 +172,7 @@ class ProductClassController extends Controller
             $data = $request->except('_token', 'quick_add');
             $data['translations'] = !empty($data['translations']) ? $data['translations'] : [];
             $data['status'] = !empty($data['status']) ? $data['status'] : 0;
+            $data['name'] = empty($data['name']) ?$data['name'] : ' ';
             DB::beginTransaction();
             $class = ProductClass::create($data);
 
@@ -200,12 +201,12 @@ class ProductClassController extends Controller
                 'msg' => __('lang.success')
             ];
        // } catch (\Exception $e) {
-//Log::emergency('File: ' . $e->getFile() . 'Line: ' . $e->getLine() . 'Message: ' . $e->getMessage());
-        ///    $output = [
-//'success' => false,
-//'msg' => __('lang.something_went_wrong')
-//];
-//}
+        //Log::emergency('File: ' . $e->getFile() . 'Line: ' . $e->getLine() . 'Message: ' . $e->getMessage());
+                ///    $output = [
+        //'success' => false,
+        //'msg' => __('lang.something_went_wrong')
+        //];
+        //}
 
 
         if ($request->quick_add) {
@@ -262,6 +263,7 @@ class ProductClassController extends Controller
             $data = $request->only('name', 'description', 'sort', 'translations', 'status');
             $data['translations'] = !empty($data['translations']) ? $data['translations'] : [];
             $data['status'] = !empty($data['status']) ? 1 : 0;
+            $data['name'] = empty($data['name']) ?$data['name'] : ' ';
             $class = ProductClass::where('id', $id)->first();
             $class->update($data);
             
