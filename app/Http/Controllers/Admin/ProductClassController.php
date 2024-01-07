@@ -56,7 +56,6 @@ class ProductClassController extends Controller
 
             $product_classes = $product_classes->selectRaw(
                 'product_classes.*,count("products.id") as product_count'
-
             );
        
 
@@ -260,22 +259,14 @@ class ProductClassController extends Controller
         );
 
         
-            $data = $request->only('name', 'description', 'sort', 'translations', 'status');
-            $data['translations'] = !empty($data['translations']) ? $data['translations'] : [];
-            $data['status'] = !empty($data['status']) ? 1 : 0;
-            $data['name'] = empty($data['name']) ?$data['name'] : ' ';
-            $class = ProductClass::where('id', $id)->first();
-            $class->update($data);
-            
-          /*  if ($request->has('uploaded_image_name')) {
-                if (!empty($request->input('uploaded_image_name'))) {
-                    $class->clearMediaCollection('product_class');
-                    $class->addMediaFromDisk($request->input('uploaded_image_name'), 'temp')->toMediaCollection('product_class');
-                }
-            }*/
-
+        $data = $request->only('name', 'description', 'sort', 'translations', 'status');
+        $data['name'] = isset($request->name) ?$request->name : ' ';
+        $data['translations'] = !empty($data['translations']) ? $data['translations'] : [];
+        $data['status'] = !empty($data['status']) ? 1 : 0;
+        $class = ProductClass::where('id', $id)->first();
+        $class->update($data);
      
-
+        if(!env('ENABLE_POS_SYNC')){
             if ($request->cropImages && count($request->cropImages) > 0) {
                 foreach ($this->getCroppedImages($request->cropImages) as $img) {
                     if ($class->media()->count() > 0) {
@@ -298,12 +289,12 @@ class ProductClassController extends Controller
                 
                 }
             } 
+        }
 
 
-
-            if(!env('ENABLE_POS_SYNC')){
-            $this->commonUtil->addSyncDataWithPos('ProductClass', $class, $data, 'PUT', 'product-class');
-            }
+            // if(!env('ENABLE_POS_SYNC')){
+            // $this->commonUtil->addSyncDataWithPos('ProductClass', $class, $data, 'PUT', 'product-class');
+            // }
             $output = [
                 'success' => true,
                 'msg' => __('lang.success')
