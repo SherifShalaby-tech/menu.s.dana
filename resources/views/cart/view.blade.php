@@ -25,14 +25,14 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                         class="border-b border-dark rounded-lg w-full px-4 w-3/5 @if ($locale_direction == 'rtl') float-left @else float-right @endif "
                         value="">
                 </div>
-                <div class="flex flex-row py-2 flow-root">
+                {{-- <div class="flex flex-row py-2 flow-root">
                     <label
                         class="font-semibold text-base text-dark pr-2 pt-1 @if ($locale_direction == 'rtl') float-right @else float-left @endif"
                         for="phone_number">@lang('lang.phone_number')</label>
                     <input type="text" name="phone_number" required
                         class="border-b border-dark rounded-lg w-full px-4 w-3/5 @if ($locale_direction == 'rtl') float-left @else float-right @endif "
                         value="">
-                </div>
+                </div> --}}
                 <div class="flex flex-row py-2 flow-root">
                     <label
                         class="font-semibold text-base text-dark pr-2 pt-1 @if ($locale_direction == 'rtl') float-right @else float-left @endif"
@@ -192,9 +192,9 @@ $locale_direction = LaravelLocalization::getCurrentLocaleDirection();
                                     </div>
                                 </div>
                                 <div
-                                    class="md:w-1/6 xs:w-1/12 text-dark  @if ($locale_direction == 'rtl') text-left @else text-right @endif ">
+                                    class="md:w-1/6 xs:w-1/12 text-dark  @if ($locale_direction == 'rtl') text-left @else text-right @endif mx-4 ">
                                     <a href="{{ action('CartController@removeProduct', $item->id) }}"
-                                        class="mt-2 rounded-full text-lg text-center border-lightgrey text-rose-700 h-8 w-8">
+                                        class="mt-2 rounded-full text-lg text-center border-rose-700 text-rose-700 border-1 h-8 w-8 bg-red-200   x-cansel">
                                         <i class="fa fa-times"></i>
                                     </a>
                                 </div>

@@ -23,7 +23,7 @@
 <style>
     .fadeInDown {
   animation-name: fadeInDown;
-  
+
 }
 .animated {
   animation-duration: 1s;
@@ -37,13 +37,13 @@
 </header>
 
 
-<section class="banner-area text-center"  style="background-image: url('@if(!empty(session('home_background_image'))){{ images_asset(asset('uploads/' . session('home_background_image'))) }}@else{{ asset('images/default-page-bg.png') }}@endif')">
+<section class="banner-area text-center"  style="background-image: url('asset('uploads/' . session('home_background_image')))">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 bg-black opacity-70 p-4 animated fadeInDown" data-appear="fadeInDown" data-delay="800">
-                
-                <h1><span class="prime-color"> @lang('lang.welcome')</span>  
-                <span class="style-change">@lang('lang.of') <br><span class="prime-color">  {{ App\Models\System::getProperty('site_title') }}</span> </span></h1>
+
+                <h6><span class="prime-color"> @lang('lang.welcome')</span>
+                <span class="style-change">@lang('lang.of') <br><span class="prime-color">  {{ App\Models\System::getProperty('site_title') }}</span> </span></h6>
             </div>
         </div>
     </div>

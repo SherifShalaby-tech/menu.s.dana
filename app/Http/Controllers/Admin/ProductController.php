@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Yajra\DataTables\Facades\DataTables;
-
+use Illuminate\Support\Facades\App;
 class ProductController extends Controller
 {
     /**
@@ -75,7 +75,7 @@ class ProductController extends Controller
                     if (!empty($image)) {
                         return '<img src="' . $image . '" height="50px" width="50px">';
                     } else {
-                        return '<img src="' . images_asset(asset('/uploads/' . session('logo'))) . '" height="50px" width="50px">';
+                        return '<img src="' . images_asset() . '" height="50px" width="50px">';
                     }
                 })
                 ->editColumn('category', function ($row) {
@@ -143,10 +143,18 @@ class ProductController extends Controller
                 //     return $discount_end_date;
                 // })
                 ->editColumn('active', function ($row) {
-                    if ($row->active == 1) {
-                        return '<span class="badge badge-success">' . __('lang.active') . '</span>';
-                    } else {
-                        return '<span class="badge badge-danger">' . __('lang.deactivated') . '</span>';
+                    if(!env('ENABLE_POS_SYNC')){
+                        if ($row->active == 1) {
+                            return '<span class="badge badge-success">' . __('lang.active') . '</span>';
+                        } else {
+                            return '<span class="badge badge-danger">' . __('lang.deactivated') . '</span>';
+                        }
+                    }else{
+                        if ($row->menu_active == 1) {
+                            return '<span class="badge badge-success">' . __('lang.active') . '</span>';
+                        } else {
+                            return '<span class="badge badge-danger">' . __('lang.deactivated') . '</span>';
+                        }
                     }
                 })
                 ->editColumn('product_details', '{!! $product_details !!}')
@@ -210,7 +218,15 @@ class ProductController extends Controller
         }
 
 
-        $categories = ProductClass::orderBy('name', 'asc')->pluck('name', 'id');
+        $locale = App::getLocale();
+        $categories = ProductClass::orderBy('name', 'asc')
+        ->get();
+        $categories = $categories->map(function ($category) use ($locale) {
+            return [
+                'id' => $category->id,
+                'name' => $category->translations->name->$locale ?? $category->name
+            ];
+        })->pluck('name', 'id');
 
         return view('admin.product.index')->with(compact(
             'categories',
@@ -228,7 +244,15 @@ class ProductController extends Controller
             abort(403, __('lang.not_authorized'));
         }
 
-        $categories = ProductClass::orderBy('name', 'asc')->pluck('name', 'id');
+        $locale = App::getLocale();
+        $categories = ProductClass::orderBy('name', 'asc')
+        ->get();
+        $categories = $categories->map(function ($category) use ($locale) {
+            return [
+                'id' => $category->id,
+                'name' => $category->translations->name->$locale ?? $category->name
+            ];
+        })->pluck('name', 'id');
         $sizes = Size::orderBy('created_at', 'desc')->pluck('name', 'id');
 
         return view('admin.product.create')->with(compact(
@@ -247,8 +271,9 @@ class ProductController extends Controller
         
         $data = $request->except('_token', 'image');
         $data['sku'] = $this->productUtil->generateProductSku($data['name']);
+        $data['name'] = empty($data['name']) ?$data['name'] : ' ';
         if(empty($request->variations)){
-            $data['purchase_price'] = $data['purchase_price'];
+            $data['purchase_price'] = !empty($data['purchase_price']) ? $data['purchase_price'] : 0;
             $data['sell_price'] = $data['sell_price'];
         }else{
                 $data['purchase_price'] = 0;
@@ -258,7 +283,14 @@ class ProductController extends Controller
         $data['discount'] = !empty($request->discount)?$request->discount : null;
         $data['discount_start_date'] = !empty($data['discount_start_date']) ? $this->commonUtil->uf_date($data['discount_start_date']) : null;
         $data['discount_end_date'] = !empty($data['discount_end_date']) ? $this->commonUtil->uf_date($data['discount_end_date']) : null;
-        $data['active'] = !empty($data['active']) ? 1 : 0;
+        if(env('ENABLE_POS_SYNC')){
+            $data['menu_active'] = !empty($data['menu_active']) ? 1 : 0;
+        }else{
+            $data['active'] = !empty($data['active']) ? 1 : 0;
+        }
+        if(env('ENABLE_POS_SYNC')){
+            $data['barcode_type'] = !empty($data['barcode_type']) ? $data['barcode_type'] : 'C128';
+        }
         $data['created_by'] = auth()->user()->id;
         $data['type'] = !empty($request->this_product_have_variant) ? 'variable' : 'single';
         $data['translations'] = !empty($data['translations']) ? $data['translations'] : [];
@@ -326,7 +358,15 @@ class ProductController extends Controller
         }
 
         $product = Product::find($id);
-        $categories = ProductClass::orderBy('name', 'asc')->pluck('name', 'id');
+        $locale = App::getLocale();
+        $categories = ProductClass::orderBy('name', 'asc')
+        ->get();
+        $categories = $categories->map(function ($category) use ($locale) {
+            return [
+                'id' => $category->id,
+                'name' => $category->translations->name->$locale ?? $category->name
+            ];
+        })->pluck('name', 'id');
         $sizes = Size::orderBy('created_at', 'desc')->pluck('name', 'id');
 
 
@@ -348,6 +388,7 @@ class ProductController extends Controller
     {
         try {
             $data = $request->except('_token', '_method', 'image');
+            $data['name'] = empty($data['name']) ?$data['name'] : ' ';
             if(!empty($request->variations) && count($request->variations)==1){
                 if(!empty($request->variations)){
                     foreach ($request->variations as $v) {
@@ -375,7 +416,11 @@ class ProductController extends Controller
             $data['discount'] = !empty($request->discount)?$request->discount : null;
             $data['discount_start_date'] = !empty($data['discount_start_date']) ? $this->commonUtil->uf_date($data['discount_start_date']) : null;
             $data['discount_end_date'] = !empty($data['discount_end_date']) ? $this->commonUtil->uf_date($data['discount_end_date']) : null;
-            $data['active'] = !empty($data['active']) ? 1 : 0;
+            if(env('ENABLE_POS_SYNC')){
+                $data['menu_active'] = !empty($data['menu_active']) ? 1 : 0;
+            }else{
+                $data['active'] = !empty($data['active']) ? 1 : 0;
+            }
             $data['created_by'] = auth()->user()->id;
             $data['type'] = !empty($request->this_product_have_variant) ? 'variable' : 'single';
             $data['translations'] = !empty($data['translations']) ? $data['translations'] : [];
@@ -416,7 +461,7 @@ class ProductController extends Controller
             $product_class = ProductClass::find($data['product_class_id']);
             $data['product_class_id'] = $product_class->pos_model_id;
 
-            $this->commonUtil->addSyncDataWithPos('Product', $product, $data, 'PUT', 'product');
+            // $this->commonUtil->addSyncDataWithPos('Product', $product, $data, 'PUT', 'product');
             DB::commit();
             $output = [
                 'success' => true,

@@ -24,7 +24,7 @@
             <div class="col-md-12">
                 <div class="section-top">
                     <h3 style="text-align: center; "><span class="style-change bg-black opacity-70">@lang('lang.categories')</span> <br>  </h3>
-                   
+
                 </div>
             </div>
         </div>
@@ -33,9 +33,9 @@
             <div class="flex flex-row items-center">
                 <div class="flex-3 w-48 md:block xs:hidden ">
                     <div class="owl-nav">
-                        <div class="prev-nav">
+                        <!-- <div class="prev-nav">
                             <img src="{{ asset('images/slider-arrow-left.png') }}" alt="" class="m-auto">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="flex-1 w-80">
@@ -57,7 +57,7 @@
                                             <a href="{{ action('ProductController@getProductListByCategory', $category->id) }}">
                                                 <h5>{{ $category->name }}</h5>
                                             </a>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div>
 
@@ -67,15 +67,15 @@
                 </div>
                 <div class="flex-3 w-48 md:block xs:hidden ">
                     <div class="owl-nav">
-                        <div class="next-nav">
+                        <!-- <div class="next-nav">
                             <img src="{{ asset('images/slider-arrow-right.png') }}" alt="" class="m-auto">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         @else
             <div class="w-full mx-auto p-4">
-                <div class="grid xs:grid-cols-3 md:grid-cols-4 xs:gap-2 md:gap-16 md:mt-12 xs:mt-6">
+                <div class="row">
                     @foreach ($categories as $category)
                         @include('home.partial.category_card', [
                             'category' => $category,
