@@ -267,7 +267,8 @@ class ProductClassController extends Controller
         $class->update($data);
      
         if(!env('ENABLE_POS_SYNC')){
-            if ($request->cropImages && count($request->cropImages) > 0) {
+            if ($request->has("cropImages") && count($request->cropImages) > 0 
+            && strpos($request->cropImages[0], 'data:image/') === 0) {
                 foreach ($this->getCroppedImages($request->cropImages) as $img) {
                     if ($class->media()->count() > 0) {
                         foreach ($class->media as $media) {
@@ -289,6 +290,9 @@ class ProductClassController extends Controller
                 
                 }
             } 
+            if (!isset($request->cropImages) || count($request->cropImages) == 0) {
+                $class->clearMediaCollection('class');
+            }
         }
 
 
